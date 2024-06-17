@@ -1,6 +1,6 @@
 # Running Linux on the Lenovo Yoga Pro 9i Gen 9 (16IMH9)
 
-Here are some notes for running Linux on this laptop. This guide was made for the Gen 9 with the MiniLED screen but should also work for the Gen 8 or similar laptops from Lenovo. For now, KDE Plasma is required (see the section on Screen) for the best experience.
+Here are some notes for running Linux on this laptop. This guide was primarily designed for the Gen 9 with the MiniLED screen, but it may also be helpful for the Gen 8 or similar laptops from Lenovo. Currently, KDE Plasma is recommended (refer to the Screen section) for the optimal experience.
 
 ## Feature Compatibility Table
 
@@ -16,6 +16,7 @@ Here are some notes for running Linux on this laptop. This guide was made for th
 | Microphone              | Works\*           | Add Speech processor via EasyEffects for higher volume                                                 |
 | Windows Hello IR Camera | Needs configuring | Detected out of the box; configuring [howdy](https://github.com/boltgolt/howdy) can be a bit difficult |
 | Nvidia GPU              | Works\*           | Stability issues on GNOME with Fedora 40; KDE Plasma works perfectly                                   |
+| Ports                   | Works             |                                                                                                        |
 
 ## Screen
 
@@ -31,11 +32,12 @@ High gamut displays use different primary colors for their subpixels, allowing t
 
 I converted the profiles using iccToXml. I took the VCGT table from NotebookCheck, the primaries (the wavelengths of the subpixels) from the BT.2020 reference profile (not exactly correct but still very good), and set the gamma to 2.46 (Windows hides the true gamma, so the NotebookCheck profile had 2.2, BT.2020 has 2.4, and I increased it to 2.46 to mimic the default Intel Control Center settings). I then converted this XML back to an ICC using iccFromXml.
 
-Colors now look very similar to an individually calibrated screen I also have. However, this color profile will only work on KDE Plasma for now (and maybe the latest build of Sway), as transforming BT.2020 to sRGB is required.
+Colors now look very similar to an individually calibrated screen I also have. However, this color profile will only work on KDE Plasma for now (and maybe the latest build of Sway), as transforming sRGB to BT.2020 is required.
 
 </details>
 
 The screen supports VRR from 48-165Hz. I have Adaptive Sync set to "Always," which results in slightly better battery life.
+
 As I know, HDR is currently disabled for internal screens on Intel Arc GPUs due to a bug. This should change in the future.
 
 ## Speakers
@@ -44,7 +46,7 @@ Speakers require some configuration. These instructions are based on [this issue
 
 ### Configuration Steps
 
-1. Create a systemd service file:
+1. Create a systemd service file by copying the following command into a terminal:
 
    ```bash
    sudo tee /etc/systemd/system/yoga-16imh9-speakers.service <<EOF
@@ -61,7 +63,7 @@ Speakers require some configuration. These instructions are based on [this issue
    EOF
    ```
 
-2. Create the script `/usr/local/bin/2pa-byps.sh`:
+2. Create the script `/usr/local/bin/2pa-byps.sh`, copy the following command into a terminal:
 
    ```bash
    sudo tee /usr/local/bin/2pa-byps.sh <<'EOF'
@@ -155,12 +157,19 @@ Speakers require some configuration. These instructions are based on [this issue
    sudo systemctl start yoga-16imh9-speakers.service
    ```
 
-You can also use [this EasyEffects profile](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/Yoga%20Pro%209i%20gen%209.json) I made using REW. If the file opens in your browser, right-click the link and select "Save link as..." to download it. You can get EasyEffects from [Flathub](https://flathub.org/apps/com.github.wwmm.easyeffects).
+For better audio quality, you can also use [this EasyEffects profile](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/Yoga%20Pro%209i%20gen%209.json).
+
+If the file opens in your browser, right-click the link and select "Save link as..." to download it. You can get EasyEffects from [Flathub](https://flathub.org/apps/com.github.wwmm.easyeffects). Select the json file under `Presets > Import a preset` button, when in the `Output` tab, and load it.
 
 <details>
     <summary>Details about the profile</summary>
-    Measured in two rooms standing on a table using a Sonarworks SoundID microphone.
-    Uses the Dr. Olive Toole Target curve until 270Hz.
+
+    Measured in two accustically different rooms while sitting on a desk using a calibrated Sonarworks SoundID microphone.
+    Made using REW.
+
+    Uses the Dr. Olive Toole Target curve until 271Hz. Sounds very natural and balanced. Still has some sub bass hearable.
+    Pretty good for a laptop speaker.
+
 </details>
 
 ## Battery
@@ -188,7 +197,7 @@ Works out of the box with good palm rejection.
 
 ## Intel GPU
 
-Works mostly. Mesa version 24.0.9 gives the error `MESA-INTEL: warning: cannot initialize blitter engine` when running `vulkaninfo --summary`. However, version 24.1.1 works without problems.
+Works mostly. Mesa version 24.0.9 gives the error `MESA-INTEL: warning: cannot initialize blitter engine` when running `vulkaninfo --summary`. However, version 24.1.1 works without problems (tested in a distrobox with arch linux)
 
 ## Microphone
 
@@ -201,5 +210,9 @@ The IR camera is detected out of the box. Configuring [howdy](https://github.com
 
 ## Nvidia GPU
 
-Works with the appropriate drivers depending on your distribution. I have some stability issues on GNOME with Fedora 40 (opening [MissionCenter](https://flathub.org/apps/io.missioncenter.MissionCenter) and some other apps crashes the session).
+Works with the appropriate drivers depending on your distribution. I have some stability issues on GNOME with Fedora 40 (opening [Mission Center](https://flathub.org/apps/io.missioncenter.MissionCenter) and some other apps crashes the session).
 Plasma works perfectly with the Nvidia GPU.
+
+## Ports
+
+Works out of the box, could not test Thunderbolt. Should however [work](https://github.com/karypid/YogaPro-16IMH9).
