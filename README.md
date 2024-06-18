@@ -19,6 +19,7 @@ This guide was done on the Fedora 40 based distribution [Aurora](https://getauro
 | Intel GPU               | Works\*             | Newer Mesa version may be required                                                                     |
 | Microphone              | Works\*             | Add Speech processor via EasyEffects for higher volume                                                 |
 | Ports                   | Works               |                                                                                                        |
+| Wifi/Bluetooth          | Works               |                                                                                                        |
 
 ## Screen
 
@@ -229,3 +230,7 @@ This laptop has a quad mic array, further investigation is needed for noise canc
 ## Ports
 
 Works out of the box, could not test Thunderbolt. Should however [work](https://github.com/karypid/YogaPro-16IMH9).
+
+## Wifi/Bluetooth
+
+Works out of the box.
