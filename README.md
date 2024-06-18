@@ -2,6 +2,8 @@
 
 Here are some notes for running Linux on this laptop. This guide was primarily designed for the Gen 9 with the MiniLED screen, but it may also be helpful for the Gen 8 or similar laptops from Lenovo. Currently, KDE Plasma is recommended (refer to the Screen section) for the optimal experience.
 
+This guide was done on the Fedora 40 based distribution [Aurora](https://getaurora.dev/) using Wayland.
+
 ## Feature Compatibility Table
 
 | Feature                 | Status            | Notes                                                                                                  |
