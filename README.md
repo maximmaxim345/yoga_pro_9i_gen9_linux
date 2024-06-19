@@ -6,20 +6,20 @@ This guide was done on the Fedora 40 based distribution [Aurora](https://getauro
 
 ## Feature Compatibility Table
 
-| Feature                 | Status              | Notes                                                                                                  |
-| ----------------------- | ------------------- | ------------------------------------------------------------------------------------------------------ |
-| Screen                  | Needs configuring   | Requires KDE Plasma for correct colors                                                                 |
-| Speakers                | Needs configuring   | Subwoofer is disabled by default due to a bug                                                          |
-| Nvidia GPU              | Needs configuring\* | Stability issues on GNOME with Fedora 40; KDE Plasma works perfectly                                   |
-| Windows Hello IR Camera | Needs configuring   | Detected out of the box; configuring [howdy](https://github.com/boltgolt/howdy) can be a bit difficult |
-| Battery                 | Works               | Good battery life; better with refresh rate set to 60Hz                                                |
-| Keyboard                | Works               | Includes backlight adjustment in GNOME and KDE                                                         |
-| Camera                  | Works               |                                                                                                        |
-| Touchpad                | Works               |                                                                                                        |
-| Intel GPU               | Works\*             | Newer Mesa version may be required                                                                     |
-| Microphone              | Works\*             | Add Speech processor via EasyEffects for higher volume                                                 |
-| Ports                   | Works               |                                                                                                        |
-| Wifi/Bluetooth          | Works               |                                                                                                        |
+| Feature                 | Status            | Notes                                                                                                  |
+| ----------------------- | ----------------- | ------------------------------------------------------------------------------------------------------ |
+| Screen                  | Needs configuring | Requires KDE Plasma for correct colors                                                                 |
+| Speakers                | Needs configuring | Subwoofer is disabled by default due to a bug                                                          |
+| Nvidia GPU              | Needs configuring | General configuration required for nvidia optimus                                                      |
+| Windows Hello IR Camera | Needs configuring | Detected out of the box; configuring [howdy](https://github.com/boltgolt/howdy) can be a bit difficult |
+| Battery                 | Works             | Good battery life; better with refresh rate set to 60Hz                                                |
+| Keyboard                | Works             | Includes backlight adjustment in GNOME and KDE                                                         |
+| Camera                  | Works             |                                                                                                        |
+| Touchpad                | Works             |                                                                                                        |
+| Intel GPU               | Works             | with MESA version >24.1.1                                                                              |
+| Microphone              | Works\*           | Add Speech processor via EasyEffects for higher volume                                                 |
+| Ports                   | Works             |                                                                                                        |
+| Wifi/Bluetooth          | Works             |                                                                                                        |
 
 ## Screen
 
@@ -176,8 +176,7 @@ If the file opens in your browser, right-click the link and select "Save link as
 
 ## Nvidia GPU
 
-Works. I have some stability issues on GNOME with Fedora 40 (opening [Mission Center](https://flathub.org/apps/io.missioncenter.MissionCenter) and some other apps crashes the session).
-Plasma works perfectly with the Nvidia GPU.
+Works. Both KDE and GNOME tested (with wayland).
 
 Enable lower power consumption by running this command:
 
@@ -220,7 +219,7 @@ Works out of the box with good palm rejection.
 
 ## Intel GPU
 
-Works mostly. Mesa version 24.0.9 gives the error `MESA-INTEL: warning: cannot initialize blitter engine` when running `vulkaninfo --summary`. However, version 24.1.1 works without problems (tested in a distrobox with arch linux)
+Works with MESA version 24.1.1 and later.
 
 ## Microphone
 
