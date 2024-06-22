@@ -66,11 +66,18 @@ Speakers require some configuration. These instructions are based on [this issue
    EOF
    ```
 
-2. Create the script `/usr/local/bin/2pa-byps.sh`, copy the following command into a terminal:
+2. Install or make sure the `i2c-tools` package is installed
+
+   ```bash
+   sudo apt-get update
+   sudo apt-get install i2c-tools
+   ```
+
+3. Create the script `/usr/local/bin/2pa-byps.sh`, copy the following command into a terminal:
 
    ```bash
    sudo tee /usr/local/bin/2pa-byps.sh <<'EOF'
-   #!/bin/sh
+   #!/bin/bash
 
    clear
    function clear_stdin() {
@@ -145,13 +152,13 @@ Speakers require some configuration. These instructions are based on [this issue
    EOF
    ```
 
-3. Make the script executable:
+4. Make the script executable:
 
    ```bash
    sudo chmod +x /usr/local/bin/2pa-byps.sh
    ```
 
-4. Enable and start the service:
+5. Enable and start the service:
 
    ```bash
 
