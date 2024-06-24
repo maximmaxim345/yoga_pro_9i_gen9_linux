@@ -66,11 +66,33 @@ Speakers require some configuration. These instructions are based on [this issue
    EOF
    ```
 
-2. Install or make sure the `i2c-tools` package is installed
+2. Install or ensure the `i2c-tools` package is installed
+
+   Depending on your Linux distribution, use one of the following commands:
+
+   For Debian/Ubuntu based distributions:
 
    ```bash
-   sudo apt-get update
-   sudo apt-get install i2c-tools
+   sudo apt update
+   sudo apt install i2c-tools
+   ```
+
+   For Fedora:
+
+   ```bash
+   sudo dnf install i2c-tools
+   ```
+
+   For Fedora Atomic Desktop:
+
+   ```bash
+   sudo rpm-ostree install i2c-tools
+   ```
+
+   For Arch Linux:
+
+   ```bash
+   sudo pacman -Sy i2c-tools
    ```
 
 3. Create the script `/usr/local/bin/2pa-byps.sh`, copy the following command into a terminal:
