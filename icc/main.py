@@ -41,7 +41,7 @@ def modify_xml(xml_file):
     parametricCurve = ET.SubElement(
         parametricCurveType, "ParametricCurve", FunctionType="0"
     )
-    parametricCurve.text = "\n        2.46\n      "
+    parametricCurve.text = "\n        2.2\n      "
 
     # Update XYZType elements
     xyz_data = [

@@ -29,7 +29,7 @@ This laptop features a wide gamut display. However, the display controller canno
     <summary>More Information About the Profile and Wide Gamut Support</summary>
 The issue arises because this laptop has a wide gamut display, which is closely related to HDR, a feature still under heavy development on Linux.
 
-On this laptop under Windows, ACM (Auto Color Management) is enabled by default. ACM transforms colors from sRGB to BT.2020 (the screen's color space). As a result, calibration files created under Windows only work correctly on Windows. Even the display's built-in EDID information assumes Windows with ACM enabled (note the Gamma field, which is set to 2.2 instead of 2.4).
+On this laptop under Windows, ACM (Auto Color Management) is enabled by default. ACM transforms colors from sRGB to BT.2020 (the screen's color space). As a result, calibration files created under Windows only work correctly on Windows.
 
 High gamut displays use different primary colors for their subpixels, allowing the screen to display more colors than an sRGB display. For example, the red subpixel has a higher wavelength, making 0xff0000 appear more "red" than on an sRGB display. To correct this, we need to slightly enable the green subpixel (e.g., 0xff0900). Simple color management (like in most other desktops/WMs) can only adjust each subpixel individually.
 
