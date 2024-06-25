@@ -33,7 +33,7 @@ On this laptop under Windows, ACM (Auto Color Management) is enabled by default.
 
 High gamut displays use different primary colors for their subpixels, allowing the screen to display more colors than an sRGB display. For example, the red subpixel has a higher wavelength, making 0xff0000 appear more "red" than on an sRGB display. To correct this, we need to slightly enable the green subpixel (e.g., 0xff0900). Simple color management (like in most other desktops/WMs) can only adjust each subpixel individually.
 
-I converted the profiles using iccToXml. I took the VCGT table from NotebookCheck, the primaries (the wavelengths of the subpixels) from the BT.2020 reference profile (not exactly correct but still very good), and set the gamma to 2.46 (Windows hides the true gamma, so the NotebookCheck profile had 2.2, BT.2020 has 2.4, and I increased it to 2.46 to mimic the default Intel Control Center settings). I then converted this XML back to an ICC using iccFromXml.
+See the icc folder for how the icc file was created.
 
 Colors now look very similar to an individually calibrated screen I also have. However, this color profile will only work on KDE Plasma for now (and maybe the latest build of Sway), as transforming sRGB to BT.2020 is required.
 
