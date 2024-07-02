@@ -252,7 +252,7 @@ This laptop has a quad mic array, further investigation is needed for noise canc
 
 Works out of the box.
 
-### Thunderbolt
+## Thunderbolt
 
 Tested on the [DELL WD19TB](https://www.dell.com/support/home/en-us/product-support/product/dell-wd19tb-dock/overview) and works out of the box (network, ports etc).  
 However, eventhough the laptop appears to be charging, the battery status on PopOS does not say so.
