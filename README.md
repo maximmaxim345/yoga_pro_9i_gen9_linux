@@ -243,6 +243,13 @@ Works out of the box with good palm rejection.
 Works with MESA version 24.1.1 and later.
 Some hangs may occur from time to time (tested on Plasma), [this is a known issue in mesa](https://gitlab.freedesktop.org/drm/i915/kernel/-/issues/10395).
 
+This is issue easily reproducible:
+
+1. Start KDE Plasma with Wayland and the [kzones](https://github.com/gerritdevriese/kzones) kwin script enabled.
+2. Connect/disconnect an external monitor. Or alternatively change the Scale of the laptop screen.
+3. Try to move a window.
+4. Observe the indefinite hang. If it does not hang, try again from step 2.
+
 ## Microphone
 
 A bit quiet by default, add a `Speech Processor` via EasyEffects to boost the volume.
