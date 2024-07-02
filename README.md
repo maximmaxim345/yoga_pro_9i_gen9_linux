@@ -16,7 +16,7 @@ This guide was done on the Fedora 40 based distribution [Aurora](https://getauro
 | Keyboard                | Works                           | Includes backlight adjustment in GNOME and KDE                                                         |
 | Camera                  | Works                           |                                                                                                        |
 | Touchpad                | Works                           |                                                                                                        |
-| Intel GPU               | Works                           | with MESA version >24.1.1                                                                              |
+| Intel GPU               | Works, with some instability    | with MESA version >24.1.1                                                                              |
 | Microphone              | Works\*                         | Add Speech processor via EasyEffects for higher volume                                                 |
 | Ports                   | Works                           |                                                                                                        |
 | Wifi/Bluetooth          | Works                           |                                                                                                        |
@@ -240,6 +240,7 @@ Works out of the box with good palm rejection.
 ## Intel GPU
 
 Works with MESA version 24.1.1 and later.
+Some hangs may occur from time to time (tested on Plasma), [this is a known issue in mesa](https://gitlab.freedesktop.org/drm/i915/kernel/-/issues/10395).
 
 ## Microphone
 
