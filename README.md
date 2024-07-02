@@ -20,6 +20,7 @@ This guide was done on the Fedora 40 based distribution [Aurora](https://getauro
 | Microphone              | Works\*                         | Add Speech processor via EasyEffects for higher volume                                                 |
 | Ports                   | Works                           |                                                                                                        |
 | Wifi/Bluetooth          | Works                           |                                                                                                        |
+| Proximity Sensor        | Not supported                   |
 
 ## Screen
 
@@ -259,3 +260,7 @@ However, eventhough the laptop appears to be charging, the battery status on Pop
 ## Wifi/Bluetooth
 
 Works out of the box.
+
+## Proximity Sensor
+
+This laptop also has a proximity sensor, which can be used to lock the screen when you walk away from it. This is not yet supported on Linux.
