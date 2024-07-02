@@ -6,42 +6,33 @@ This guide was done on the Fedora 40 based distribution [Aurora](https://getauro
 
 ## Feature Compatibility Table
 
-| Feature                 | Status            | Notes                                                                                                  |
-| ----------------------- | ----------------- | ------------------------------------------------------------------------------------------------------ |
-| Screen                  | Needs configuring | Requires KDE Plasma for correct colors                                                                 |
-| Speakers                | Needs configuring | Subwoofer is disabled by default due to a bug                                                          |
-| Nvidia GPU              | Needs configuring | General configuration required for nvidia optimus                                                      |
-| Windows Hello IR Camera | Needs configuring | Detected out of the box; configuring [howdy](https://github.com/boltgolt/howdy) can be a bit difficult |
-| Battery                 | Works             | Good battery life; better with refresh rate set to 60Hz                                                |
-| Keyboard                | Works             | Includes backlight adjustment in GNOME and KDE                                                         |
-| Camera                  | Works             |                                                                                                        |
-| Touchpad                | Works             |                                                                                                        |
-| Intel GPU               | Works             | with MESA version >24.1.1                                                                              |
-| Microphone              | Works\*           | Add Speech processor via EasyEffects for higher volume                                                 |
-| Ports                   | Works             |                                                                                                        |
-| Wifi/Bluetooth          | Works             |                                                                                                        |
+| Feature                 | Status                          | Notes                                                                                                  |
+| ----------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Screen                  | Incomplete, workaround with KDE | Requires KDE Plasma for correct colors                                                                 |
+| Speakers                | Needs configuring               | Subwoofer is disabled by default due to a bug                                                          |
+| Nvidia GPU              | Needs configuring               | General configuration required for nvidia optimus                                                      |
+| Windows Hello IR Camera | Needs configuring               | Detected out of the box; configuring [howdy](https://github.com/boltgolt/howdy) can be a bit difficult |
+| Battery                 | Works                           | Good battery life; better with refresh rate set to 60Hz                                                |
+| Keyboard                | Works                           | Includes backlight adjustment in GNOME and KDE                                                         |
+| Camera                  | Works                           |                                                                                                        |
+| Touchpad                | Works                           |                                                                                                        |
+| Intel GPU               | Works                           | with MESA version >24.1.1                                                                              |
+| Microphone              | Works\*                         | Add Speech processor via EasyEffects for higher volume                                                 |
+| Ports                   | Works                           |                                                                                                        |
+| Wifi/Bluetooth          | Works                           |                                                                                                        |
 
 ## Screen
 
-This laptop features a wide gamut display. However, the display controller cannot accept an sRGB signal directly. To achieve accurate colors, a compositor with color management support is necessary. Currently, this means using KDE Plasma. Download the modified ICC profile from [here](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/LEN160_3_2K_cal-linux.icc), save it somewhere safe, and select it under `Display & Monitor > Color Profile`.
+This laptop features a wide gamut display. The display controller used in this laptop (more specifically the TCON) supports sRGB, but defaults to bt.2020.
+Under linux, the TCON is never switched to sRGB, resulting in overblown colors.
+Until we have a working driver (if ever have one), we can either:
 
-<details>
-    <summary>More Information About the Profile and Wide Gamut Support</summary>
-The issue arises because this laptop has a wide gamut display, which is closely related to HDR, a feature still under heavy development on Linux.
-
-On this laptop under Windows, ACM (Auto Color Management) is enabled by default. ACM transforms colors from sRGB to BT.2020 (the screen's color space). As a result, calibration files created under Windows only work correctly on Windows.
-
-High gamut displays use different primary colors for their subpixels, allowing the screen to display more colors than an sRGB display. For example, the red subpixel has a higher wavelength, making 0xff0000 appear more "red" than on an sRGB display. To correct this, we need to slightly enable the green subpixel (e.g., 0xff0900). Simple color management (like in most other desktops/WMs) can only adjust each subpixel individually.
-
-See the icc folder for how the icc file was created.
-
-Colors now look very similar to an individually calibrated screen I also have. However, this color profile will only work on KDE Plasma for now (and maybe the latest build of Sway), as transforming sRGB to BT.2020 is required.
-
-</details>
+- (Only works under KDE Plasma for now!) Use [this](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/LEN160_3_2K_cal-linux.icc) icc profile which transform everything on screen to bt.2020. Save it somewhere safe, and select it under `Display & Monitor > Color Profile`.
+- Or use a wayland compositor that supports color management with native bt.2020 support. This does not exist yet, but I briefly tried [manually compiling this](https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/3433) with custom patches to enable bt.2020 on all displays even if HDR is off.
 
 The screen supports VRR from 48-165Hz. I have Adaptive Sync set to "Always," which results in slightly better battery life.
 
-As I know, HDR is currently disabled for internal screens on Intel Arc GPUs due to a bug. This should change in the future.
+As I know, HDR is currently disabled for internal screens on Intel Arc GPUs due to a bug (maybe also related to the TCON). This should change in the future.
 
 ## Speakers
 
