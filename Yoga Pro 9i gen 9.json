@@ -249,7 +249,7 @@
                     "width": 4.0
                 }
             },
-            "mode": "IIR",
+            "mode": "FFT",
             "num-bands": 22,
             "output-gain": 0.0,
             "pitch-left": 0.0,
