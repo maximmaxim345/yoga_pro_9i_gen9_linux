@@ -184,8 +184,7 @@ Speakers require some configuration. These instructions are based on [this issue
    ```bash
 
    sudo systemctl daemon-reload
-   sudo systemctl enable yoga-16imh9-speakers.service
-   sudo systemctl start yoga-16imh9-speakers.service
+   sudo systemctl enable --now yoga-16imh9-speakers.service
    ```
 
 For better audio quality, you can also use [this EasyEffects profile](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/Yoga%20Pro%209i%20gen%209%20v2.json). If you have problems with too much vibrations use [this profile](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/Yoga%20Pro%209i%20gen%209%20v2%20less%20bass.json) instead.
