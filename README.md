@@ -8,7 +8,7 @@ This guide was done on the Fedora 40 based distribution [Aurora](https://getauro
 
 | Feature                 | Status                          | Notes                                                                                                  |
 | ----------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Screen                  | Incomplete, workaround with KDE | Requires KDE Plasma for correct colors                                                                 |
+| Screen                  | Will soon Work\*                | Requires linux kernel 6.11 or newer; or alternatively KDE Plasma                                       |
 | Speakers                | Needs configuring               | Subwoofer is disabled by default due to a bug                                                          |
 | Nvidia GPU              | Needs configuring               | General configuration required for nvidia optimus                                                      |
 | Windows Hello IR Camera | Needs configuring               | Detected out of the box; configuring [howdy](https://github.com/boltgolt/howdy) can be a bit difficult |
@@ -24,16 +24,14 @@ This guide was done on the Fedora 40 based distribution [Aurora](https://getauro
 
 ## Screen
 
-This laptop features a wide gamut display. The display controller used in this laptop (more specifically the TCON) supports sRGB, but defaults to bt.2020.
-Under linux, the TCON is never switched to sRGB, resulting in overblown colors.
-Until we have a working driver (if ever have one), we can either:
+This laptop is produced in some configurations with the same model number, but slightly different internal components.
+Some configurations already work in prior versions, but others have oversaturated colors (especially red).
 
-- (Only works under KDE Plasma for now!) Use [this](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/LEN160_3_2K_cal-linux.icc) icc profile which transform everything on screen to bt.2020. Save it somewhere safe, and select it under `Display & Monitor > Color Profile`.
-- Or use a wayland compositor that supports color management with native bt.2020 support. This does not exist yet, but I briefly tried [manually compiling this](https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/3433) with custom patches to enable bt.2020 on all displays even if HDR is off.
+This problem will presumably be fixed in the linux kernel version 6.11 (tested on drm-tip). The screen now (on drm-tip) works correctly, including working HDR support.
+
+If you experience issues with colors and do not have a kernel prior to 6.11, you can use [this](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/LEN160_3_2K_cal-linux.icc) icc profile (only works on KDE Plasma) which transform everything on screen to bt.2020. Save it somewhere safe, and select it under `Display & Monitor > Color Profile`. After the update to 6.10 or newer, just remove the icc profile again.
 
 The screen supports VRR from 48-165Hz. I have Adaptive Sync set to "Always," which results in slightly better battery life.
-
-As I know, HDR is currently disabled for internal screens on Intel Arc GPUs due to a bug (maybe also related to the TCON). This should change in the future.
 
 ## Speakers
 
