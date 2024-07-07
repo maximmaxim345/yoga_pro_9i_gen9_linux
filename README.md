@@ -8,11 +8,11 @@ This guide was done on the Fedora 40 based distribution [Aurora](https://getauro
 
 | Feature                 | Status                          | Notes                                                                                                  |
 | ----------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Screen                  | Will soon Work\*                | Requires linux kernel 6.11 or newer; or alternatively KDE Plasma                                       |
+| Screen                  | Will soon work\*                | Requires linux kernel 6.11 or newer; or alternatively KDE Plasma                                       |
 | Speakers                | Needs configuring               | Subwoofer is disabled by default due to a bug                                                          |
 | Nvidia GPU              | Needs configuring               | General configuration required for nvidia optimus                                                      |
 | Windows Hello IR Camera | Needs configuring               | Detected out of the box; configuring [howdy](https://github.com/boltgolt/howdy) can be a bit difficult |
-| Battery                 | Works                           | Good battery life; better with refresh rate set to 60Hz                                                |
+| Battery                 | Works                           | Good battery life; better with refresh rate set to 60Hz; conservative battery limit can be enabled     |
 | Keyboard                | Works                           | Includes backlight adjustment in GNOME and KDE                                                         |
 | Camera                  | Works                           |                                                                                                        |
 | Touchpad                | Works                           |                                                                                                        |
@@ -229,6 +229,44 @@ I have good battery life, more or less equal to Windows. If you need more batter
 | Light use              | 8h           |
 | Programming            | 6h 30m       |
 | YouTube video playback | 6h 30m       |
+
+### Limit battery charging threshold
+
+You can enable the battery conservation mode, which limits the charging threshold to around ??? to prolong battery lifespan.
+
+You can setup a service by running:
+
+```bash
+sudo tee /etc/systemd/system/yoga-16imh9-battery-limit.service <<EOF
+[Unit]
+Description=Battery Conservation Mode
+
+[Service]
+User=root
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/bash -c 'echo 1 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:*/conservation_mode'
+ExecStop=/bin/bash -c 'echo 0 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:*/conservation_mode'
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl daemon-reload
+```
+
+After that, run this command anytime you want to enable conservative mode (will also be automatically applied on boot):
+
+```bash
+
+sudo systemctl enable --now yoga-16imh9-battery-limit.service
+```
+
+And to disable it again, run:
+
+```bash
+
+sudo systemctl disable --now yoga-16imh9-battery-limit.service
+```
 
 ## Keyboard
 
