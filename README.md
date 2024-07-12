@@ -91,6 +91,9 @@ Speakers require some configuration. These instructions are based on [this issue
    sudo tee /usr/local/bin/2pa-byps.sh <<'EOF'
    #!/bin/bash
 
+   # Some distros don't have i2c-dev module loaded by default, so we load it manually
+   modprobe i2c-dev
+
    clear
    function clear_stdin() {
        old_tty_settings=$(stty -g)
