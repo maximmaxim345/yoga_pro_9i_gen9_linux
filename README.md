@@ -235,7 +235,7 @@ I have good battery life, more or less equal to Windows. If you need more batter
 
 ### Limit battery charging threshold
 
-You can enable the battery conservation mode, which limits the charging threshold to around ??? to prolong battery lifespan.
+You can enable the battery conservation mode, which limits the maximum battery charge level to around 80%, to prolong battery lifespan.
 
 You can setup a service by running:
 
