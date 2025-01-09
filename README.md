@@ -1,8 +1,10 @@
 # Running Linux on the Lenovo Yoga Pro 9i Gen 9 (16IMH9)
 
-Here are some notes for running Linux on this laptop. This guide was primarily designed for the Gen 9 with the MiniLED screen, but it may also be helpful for the Gen 8 or similar laptops from Lenovo. Currently, KDE Plasma is recommended (refer to the Screen section) for the optimal experience.
+Here are some notes for running Linux on this laptop. This guide was primarily designed for the Gen 9 with the MiniLED screen, but it may also be helpful for the Gen 8 or similar laptops from Lenovo.
 
 This guide was done on the Fedora 40 based distribution [Aurora](https://getaurora.dev/) using Wayland.
+
+Both GNOME and Plasma 6 work great with wayland, any other DE/WM should work as well.
 
 ## Feature Compatibility Table
 
@@ -280,6 +282,7 @@ Works out of the box with good palm rejection.
 
 Works with MESA version 24.1.1 and later.
 Some hangs may occur from time to time (tested on Plasma), [this is a known issue in mesa](https://gitlab.freedesktop.org/drm/i915/kernel/-/issues/10395).
+No issues on GNOME.
 
 This is issue easily reproducible:
 
