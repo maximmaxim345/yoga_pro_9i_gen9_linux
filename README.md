@@ -208,7 +208,7 @@ echo "options nvidia NVreg_DynamicPowerManagement=0x02" | sudo tee /etc/modprobe
 Fix suspend issues by running:
 
 ```bash
-sudo systemctl enable nvidia-hibernate.service nvidia-persistenced.service nvidia-resume.service nvidia-suspend.service
+sudo systemctl enable nvidia-hibernate.service nvidia-resume.service nvidia-suspend.service
 ```
 
 ## Windows Hello IR Camera
