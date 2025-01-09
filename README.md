@@ -12,7 +12,7 @@ Both GNOME and Plasma 6 work great with wayland, any other DE/WM should work as 
 | ----------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | Screen                  | Will soon work\*                | Requires linux kernel 6.11 or newer; or alternatively KDE Plasma                                       |
 | Speakers                | Needs configuring               | Subwoofer is disabled by default due to a bug                                                          |
-| Nvidia GPU              | Needs configuring               | General configuration required for nvidia optimus                                                      |
+| Nvidia GPU              | Needs configuring               | Install drivers and enable suspend services (depending on distrobution)                                |
 | Windows Hello IR Camera | Needs configuring               | Detected out of the box; configuring [howdy](https://github.com/boltgolt/howdy) can be a bit difficult |
 | Battery                 | Works                           | Good battery life; better with refresh rate set to 60Hz; conservative battery limit can be enabled     |
 | Keyboard                | Works                           | Includes backlight adjustment in GNOME and KDE                                                         |
@@ -200,12 +200,6 @@ If the file opens in your browser, right-click the link and select "Save link as
 ## Nvidia GPU
 
 Works. Both KDE and GNOME tested (with wayland).
-
-Enable lower power consumption by running this command:
-
-```bash
-echo "options nvidia NVreg_DynamicPowerManagement=0x02" | sudo tee /etc/modprobe.d/nvidia.conf
-```
 
 Fix suspend issues by running:
 
