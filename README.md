@@ -10,7 +10,7 @@ Both GNOME and Plasma 6 work great with wayland, any other DE/WM should work as 
 
 | Feature                 | Status                          | Notes                                                                                                  |
 | ----------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Screen                  | Will soon work\*                | Requires linux kernel 6.11 or newer; or alternatively KDE Plasma                                       |
+| Screen                  | Works                           | Requires linux kernel 6.11 or newer                                                                    |
 | Speakers                | Needs configuring               | Subwoofer is disabled by default due to a bug                                                          |
 | Nvidia GPU              | Needs configuring               | Install drivers and enable suspend services (depending on distrobution)                                |
 | Windows Hello IR Camera | Needs configuring               | Detected out of the box; configuring [howdy](https://github.com/boltgolt/howdy) can be a bit difficult |
@@ -26,14 +26,19 @@ Both GNOME and Plasma 6 work great with wayland, any other DE/WM should work as 
 
 ## Screen
 
-This laptop is produced in some configurations with the same model number, but slightly different internal components.
-Some configurations already work in prior versions, but others have oversaturated colors (especially red).
+The screen works out of the box, including VRR and HDR support.
 
-This problem will presumably be fixed in the linux kernel version 6.11 (tested on drm-tip). The screen now (on drm-tip) works correctly, including working HDR support.
+<details>
+    <summary>Notes for linux 6.10 and older</summary>
+    This laptop is produced in some configurations with the same model number, but slightly different internal components.
+    Some configurations already work in prior versions, but others have oversaturated colors (especially red).
 
-If you experience issues with colors and do not have a kernel prior to 6.11, you can use [this](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/LEN160_3_2K_cal-linux.icc) icc profile (only works on KDE Plasma) which transform everything on screen to bt.2020. Save it somewhere safe, and select it under `Display & Monitor > Color Profile`. After the update to 6.10 or newer, just remove the icc profile again.
+    This problem will presumably be fixed in the linux kernel version 6.11 (tested on drm-tip). The screen now (on drm-tip) works correctly, including working HDR support.
 
-The screen supports VRR from 48-165Hz. I have Adaptive Sync set to "Always," which results in slightly better battery life.
+    If you experience issues with colors and do not have a kernel prior to 6.11, you can use [this](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/LEN160_3_2K_cal-linux.icc) icc profile (only works on KDE Plasma) which transform everything on screen to bt.2020. Save it somewhere safe, and select it under `Display & Monitor > Color Profile`. After the update to 6.10 or newer, just remove the icc profile again.
+</details>
+
+The screen supports VRR from 48-165Hz. On KDE Plasma Adaptive Sync can be set to "Always," which results in slightly better battery life (than 165Hz without VRR).
 
 ## Speakers
 
