@@ -18,7 +18,7 @@ Both GNOME and Plasma 6 work great with wayland, any other DE/WM should work as 
 | Keyboard                | Works                           | Includes backlight adjustment in GNOME and KDE                                                         |
 | Camera                  | Works                           |                                                                                                        |
 | Touchpad                | Works                           |                                                                                                        |
-| Intel GPU               | Works, with some instability    | with MESA version >24.1.1                                                                              |
+| Intel GPU               | Works                           |                                                                                                        |
 | Microphone              | Works\*                         | Add Speech processor via EasyEffects for higher volume                                                 |
 | Ports                   | Works                           |                                                                                                        |
 | Wifi/Bluetooth          | Works                           |                                                                                                        |
