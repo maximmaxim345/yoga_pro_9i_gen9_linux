@@ -49,6 +49,7 @@ Speakers require some configuration. These instructions are based on [this issue
    [Service]
    User=root
    Type=oneshot
+   RemainAfterExit=yes
    ExecStart=/bin/sh -c "/usr/local/bin/2pa-byps.sh | logger"
 
    [Install]
@@ -91,17 +92,10 @@ Speakers require some configuration. These instructions are based on [this issue
    sudo tee /usr/local/bin/2pa-byps.sh <<'EOF'
    #!/bin/bash
 
+   export TERM=linux
    # Some distros don't have i2c-dev module loaded by default, so we load it manually
+
    modprobe i2c-dev
-
-   clear
-   function clear_stdin() {
-       old_tty_settings=$(stty -g)
-       stty -icanon min 0 time 0
-       while read -r none; do :; done
-       stty "$old_tty_settings"
-   }
-
    # Function to find the correct I2C bus (third DesignWare adapter)
    find_i2c_bus() {
        local adapter_description="Synopsys DesignWare I2C adapter"
@@ -115,7 +109,7 @@ Speakers require some configuration. These instructions are based on [this issue
    }
    i2c_bus=$(find_i2c_bus)
    if [ -z "$i2c_bus" ]; then
-       echo "Error: Could not find the third DesignWare I2C bus for the audio IC."
+       echo "Error: Could not find the third DesignWare I2C bus for the audio IC." >&2
        exit 1
    fi
    echo "Using I2C bus: $i2c_bus"
@@ -170,7 +164,6 @@ Speakers require some configuration. These instructions are based on [this issue
        i2cset -f -y "$i2c_bus" "$value" 0x02 0x00
        count=$((count + 1))
    done
-   clear_stdin
    EOF
    ```
 
