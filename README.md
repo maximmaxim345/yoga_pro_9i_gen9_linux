@@ -189,6 +189,18 @@ Speakers require some configuration. These instructions are based on [this issue
    sudo systemctl enable --now yoga-16imh9-speakers.service
    ```
 
+6. Disable power management for the speakers:
+
+   ```bash
+   sudo tee /etc/modprobe.d/disable-hda-power-save.conf <<EOF
+   options snd_hda_intel power_save=0
+   EOF
+   sudo tee /etc/udev/rules.d/99-i2c-power-control.rules <<EOF
+   SUBSYSTEM=="i2c-dev", ATTR{name}=="Synopsys DesignWare I2C adapter", ATTR{power/control}="on"
+   EOF
+   ```
+   (see [this issue](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/issues/10) and [this bug report](https://bugzilla.kernel.org/show_bug.cgi?id=217449))
+
 For better audio quality, you can also use [this EasyEffects profile](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/Yoga%20Pro%209i%20gen%209%20v2.json). If you have problems with too much vibrations use [this profile](https://github.com/maximmaxim345/yoga_pro_9i_gen9_linux/raw/main/Yoga%20Pro%209i%20gen%209%20v2%20less%20bass.json) instead.
 
 If the file opens in your browser, right-click the link and select "Save link as..." to download it. You can get EasyEffects from [Flathub](https://flathub.org/apps/com.github.wwmm.easyeffects). Select the json file under `Presets > Import a preset` button, when in the `Output` tab, and load it.
