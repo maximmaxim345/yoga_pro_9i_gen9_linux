@@ -52,15 +52,16 @@ Speakers require some configuration. These instructions are based on [this issue
    sudo tee /etc/systemd/system/yoga-16imh9-speakers.service <<EOF
    [Unit]
    Description=Turn on speakers using i2c configuration
+   After=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
 
    [Service]
    User=root
    Type=oneshot
-   RemainAfterExit=yes
    ExecStart=/bin/sh -c "/usr/local/bin/2pa-byps.sh | logger"
 
    [Install]
-   WantedBy=multi-user.target
+   WantedBy=multi-user.target sleep.target
+   Also=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
    EOF
    ```
 
