@@ -44,6 +44,8 @@ The screen supports VRR from 48-165Hz. On KDE Plasma Adaptive Sync can be set to
 
 Speakers require some configuration. These instructions are based on [this issue](https://github.com/karypid/YogaPro-16IMH9/issues/2) and [this discussion](https://bugzilla.kernel.org/show_bug.cgi?id=217449)
 
+> This section was last updated in January 2025. If you have followed these steps before and still encounter issues, try rerunning the commands below.
+
 ### Configuration Steps
 
 1. Create a systemd service file by copying the following command into a terminal:
