@@ -66,6 +66,38 @@ Speakers require some configuration. These instructions are based on [this issue
    Also=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
    EOF
    ```
+<details>
+    <summary>NixOS version</summary>
+    As NixOS uses a declarative configuration model, Systemd services are defined within the Nix configuration. Nix expressions are used to generate the necessary     service files. 2pa-byps.sh should be placed in /etc/nixos.
+
+  ```bash  
+    sudo tee /etc/nixos/yoga-16imh9-speakers.nix <<EOF
+    { config, pkgs, ... }:
+
+    {
+      environment.systemPackages = with pkgs; [
+        util-linux
+        kmod
+        i2c-tools
+      ];
+
+      boot.kernelModules = [ "i2c-dev" ];
+
+      systemd.services.turn-on-speakers = {
+        description = "Turn on speakers using i2c configuration";
+        after = [ "suspend.target" "hibernate.target" "hybrid-sleep.target" "suspend-then-hibernate.target" ];
+
+        serviceConfig = {
+          User = "root";
+          Type = "oneshot";
+          ExecStart = "${pkgs.bash}/bin/bash -c \"${./2pa-byps.sh} | ${pkgs.util-linux}/bin/logger\"";
+        };
+          wantedBy = [ "multi-user.target" "sleep.target" ];
+     };
+    }
+  EOF
+  ```
+</details>
 
 2. Install or ensure the `i2c-tools` package is installed
 
