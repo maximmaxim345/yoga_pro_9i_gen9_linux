@@ -267,10 +267,14 @@ I have good battery life, more or less equal to Windows. If you need more batter
 
 | Activity               | Battery Life |
 | ---------------------- | ------------ |
-| Idle                   | 10h          |
+| Total Idle             | 10h          |
 | Light use              | 8h           |
-| Programming            | 6h 30m       |
+| Light Programming      | 6h 30m       |
+| Programming            | 4h 00m       |
 | YouTube video playback | 6h 30m       |
+
+To get better battery live during light use, you can try [Intel Low Power Mode Daemon](https://github.com/intel/intel-lpmd). It allows part of the CPU to be powered down during light use, which may increase your battery life by a hour or so.
+Did not extensively test it myself since automatic detection is broken for me, but it can decrease power usage by about 1-3W when idle.
 
 ### Limit battery charging threshold
 
