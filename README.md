@@ -44,7 +44,7 @@ The screen supports VRR from 48-165Hz. On KDE Plasma Adaptive Sync can be set to
 
 Speakers require some configuration. These instructions are based on [this issue](https://github.com/karypid/YogaPro-16IMH9/issues/2) and [this discussion](https://bugzilla.kernel.org/show_bug.cgi?id=217449)
 
-> This section was last updated in January 2025. If you have followed these steps before and still encounter issues, try rerunning the commands below.
+> This section was last updated in July 2025. If you have followed these steps before and still encounter issues, try rerunning the commands below.
 
 ### Configuration Steps
 
@@ -155,7 +155,15 @@ Speakers require some configuration. These instructions are based on [this issue
        exit 1
    fi
    echo "Using I2C bus: $i2c_bus"
-   i2c_addr=(0x3f 0x38)
+
+   laptop_model=$(</sys/class/dmi/id/product_name)
+   echo "Laptop model: $laptop_model"
+   if [[ "$laptop_model" == "83BY" ]]; then
+       # For the 16IRP8 (see issue #17)
+       i2c_addr=(0x39 0x38 0x3d 0x3b)
+   else
+       i2c_addr=(0x3f 0x38)
+   fi
 
    count=0
    for value in "${i2c_addr[@]}"; do
