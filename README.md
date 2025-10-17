@@ -138,26 +138,33 @@ Speakers require some configuration. These instructions are based on [this issue
    # Some distros don't have i2c-dev module loaded by default, so we load it manually
 
    modprobe i2c-dev
-   # Function to find the correct I2C bus (third DesignWare adapter)
+
+   laptop_model=$(</sys/class/dmi/id/product_name)
+   echo "Laptop model: $laptop_model"
+
+   # Function to find the correct I2C bus
    find_i2c_bus() {
        local adapter_description="Synopsys DesignWare I2C adapter"
        local dw_count=$(i2cdetect -l | grep -c "$adapter_description")
-       if [ "$dw_count" -lt 3 ]; then
-           echo "Error: Less than 3 DesignWare I2C adapters found." >&2
+
+       # Use 2nd adapter for 16IAH10 (Gen 10), 3rd for others
+       local bus_index=3
+       [[ "$laptop_model" == "83L0" ]] && bus_index=2
+
+       if [ "$dw_count" -lt "$bus_index" ]; then
+           echo "Error: Less than $bus_index DesignWare I2C adapters found." >&2
            return 1
        fi
-       local bus_number=$(i2cdetect -l | grep "$adapter_description" | awk '{print $1}' | sed 's/i2c-//' | sed -n '3p')
+       local bus_number=$(i2cdetect -l | grep "$adapter_description" | awk '{print $1}' | sed 's/i2c-//' | sed -n "${bus_index}p")
        echo "$bus_number"
    }
    i2c_bus=$(find_i2c_bus)
    if [ -z "$i2c_bus" ]; then
-       echo "Error: Could not find the third DesignWare I2C bus for the audio IC." >&2
+       echo "Error: Could not find the DesignWare I2C bus for the audio IC." >&2
        exit 1
    fi
    echo "Using I2C bus: $i2c_bus"
 
-   laptop_model=$(</sys/class/dmi/id/product_name)
-   echo "Laptop model: $laptop_model"
    if [[ "$laptop_model" == "83BY" ]]; then
        # For the 16IRP8 (see issue #17)
        i2c_addr=(0x39 0x38 0x3d 0x3b)
