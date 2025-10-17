@@ -1,6 +1,6 @@
 # Running Linux on the Lenovo Yoga Pro 9i Gen 9 (16IMH9)
 
-Here are some notes for running Linux on this laptop. This guide was primarily designed for the Gen 9 with the MiniLED screen, but it may also be helpful for the Gen 8 or similar laptops from Lenovo.
+Here are some notes for running Linux on this laptop. This guide was primarily designed for the Gen 9 with the MiniLED screen, but also works on the Gen 8 and Gen 10 models, though some features may vary or need additional testing.
 
 This guide was done on the Fedora 40 based distribution [Aurora](https://getaurora.dev/) using Wayland.
 
@@ -43,6 +43,8 @@ The screen supports VRR from 48-165Hz. On KDE Plasma Adaptive Sync can be set to
 ## Speakers
 
 Speakers require some configuration. These instructions are based on [this issue](https://github.com/karypid/YogaPro-16IMH9/issues/2) and [this discussion](https://bugzilla.kernel.org/show_bug.cgi?id=217449)
+
+> The speaker configuration script supports Gen 8 (16IRP8), Gen 9 (16IMH9), and Gen 10 (16IAH10) models with automatic detection.
 
 > This section was last updated in July 2025. If you have followed these steps before and still encounter issues, try rerunning the commands below.
 
