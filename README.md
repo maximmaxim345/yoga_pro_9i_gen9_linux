@@ -264,6 +264,50 @@ If the file opens in your browser, right-click the link and select "Save link as
 
 </details>
 
+### Fixing volume control on kernel 7.0 and newer
+
+On recent kernels the volume slider stops attenuating the speakers: the sound is either muted or plays at full volume.
+
+The fix is to let PipeWire attenuate in software. Software volume is applied *before* the stream reaches the DSP, so it affects both the tweeter and woofer branches equally and the slider works normally again.
+
+1. Force software volume for the internal sound card:
+
+   ```bash
+   sudo tee /etc/wireplumber/wireplumber.conf.d/51-yoga-speaker-softvol.conf <<'EOF'
+   # Yoga Pro 9 16IMH9: make the volume slider work on kernel 7.0+ 
+   # The SOF topology only puts a hardware volume node on the tweeter branch, so
+   # hardware volume leaves the woofers at full scale. Forcing software volume
+   # attenuates the stream before the DSP tweeter/woofer split.
+   monitor.alsa.rules = [
+     {
+       matches = [
+         { device.name = "~alsa_card.pci.*skl_hda_dsp_generic" }
+         { node.name = "~alsa_output.pci.*skl_hda_dsp_generic.*" }
+       ]
+       actions = {
+         update-props = {
+           api.alsa.soft-mixer = true
+         }
+       }
+     }
+   ]
+   EOF
+   ```
+
+2. Pin the hardware speaker gain to 0 dB (so the software volume is the only attenuation) and save the mixer state so it persists across reboots:
+
+   ```bash
+   amixer -c sofhdadsp sset Master 100% > /dev/null
+   amixer -c sofhdadsp sset Speaker 100% > /dev/null
+   sudo alsactl store
+   ```
+
+3. Restart the audio stack (or simply reboot):
+
+   ```bash
+   systemctl --user restart wireplumber pipewire pipewire-pulse
+   ```
+
 ## Nvidia GPU
 
 Works. Both KDE and GNOME tested (with wayland).
